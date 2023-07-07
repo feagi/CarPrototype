@@ -28,9 +28,28 @@ func _unhandled_key_input(_event : InputEvent) -> void:
 
 
 func _physics_process(d : float) -> void:
-	steering = lerp(steering, Input.get_axis("right", "left") * 0.4, 5 * d)
+	$SubViewport/camerafirstperson.rotation = rotation + Vector3(0, 3.141593, 0)
+	$SubViewport/camerafirstperson.position = position + Vector3(0, 1.26227, 1.36096)
+	var inp_forward = 0
+	var inp_steer = 0
 	if engine_status:
-		accelerate(Input.get_axis("back", "forward"))
+		var data = network_setting.one_frame
+		if data:
+			for i in data:
+				if "motor" in i:
+					for x in data[i]:
+						inp_forward = data[i][x]
+				if "misc" in i:
+					for x in data[i]:
+						if x == "0":
+							inp_steer = 1
+						if x == "1":
+							inp_steer = -1
+		network_setting.one_frame = ""
+#		accelerate(Input.get_axis("back", "forward"))
+#		steering = lerp(steering, Input.get_axis("right", "left") * 0.4, 5 * d)
+		steering = lerp(steering, inp_steer * 0.4, 5 * d)
+		accelerate(inp_forward)
 
 
 func accelerate(speed : float) -> void:
