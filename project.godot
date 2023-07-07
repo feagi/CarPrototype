@@ -15,6 +15,10 @@ run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+network_setting="*res://network_settings/network_configuration.gd"
+
 [input]
 
 back={
@@ -51,3 +55,24 @@ reset={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"echo":false,"script":null)
 ]
 }
+
+[memory]
+
+limits/message_queue/max_size_kb=1000000000
+
+[network]
+
+limits/packet_peer_stream/max_buffer_po2=1000000000
+limits/debugger/max_chars_per_second=1000000
+limits/debugger/max_queued_messages=1000000000
+limits/debugger/max_errors_per_second=1000000000
+limits/debugger/max_warnings_per_second=1000000000
+limits/webrtc/max_channel_in_buffer_kb=1000000000
+limits/websocket_client/max_in_buffer_kb=1000000000
+limits/websocket_client/max_in_packets=1000000000
+limits/websocket_client/max_out_buffer_kb=1000000000
+limits/websocket_client/max_out_packets=1000000000
+limits/websocket_server/max_in_buffer_kb=1000000000
+limits/websocket_server/max_in_packets=1000000000
+limits/websocket_server/max_out_buffer_kb=1000000000
+limits/websocket_server/max_out_packets=1000000000
