@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://del72vip3ke8o"]
+[gd_scene load_steps=53 format=3 uid="uid://del72vip3ke8o"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_8shy6"]
 [ext_resource type="Texture2D" uid="uid://mq4kbdkwpeo0" path="res://assets/materials/textures/prototype_texture.png" id="1_vnqn7"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bljsea7mi3tqx" path="res://assets/scn/3DCamera.scn" id="3_adcb6"]
 [ext_resource type="Script" path="res://scenes/change_color.gd" id="4_qhvbw"]
 [ext_resource type="PackedScene" uid="uid://80q5ukhbxqkf" path="res://scenes/gui.tscn" id="5_80jw4"]
+[ext_resource type="Script" path="res://scenes/test.gd" id="6_0lhr8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dc3u0"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -475,6 +476,15 @@ shape = SubResource("SphereShape3D_0eirp")
 
 [node name="Car" parent="." instance=ExtResource("2_wygbo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="SubViewport" type="SubViewport" parent="Car"]
+gui_snap_controls_to_pixels = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+script = ExtResource("6_0lhr8")
+
+[node name="camerafirstperson" type="Camera3D" parent="Car/SubViewport"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.26227, 1.36096)
 
 [node name="3DCamera" parent="." node_paths=PackedStringArray("look_at") instance=ExtResource("3_adcb6")]
 look_at = NodePath("../Car")
